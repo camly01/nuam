@@ -644,14 +644,6 @@ error_api: 	Mensaje de error si falla la consulta.
 
 │   │   │   └── lista\_registros.html
 
-│   │   └── usuarios
-
-│   │       ├── crear\_usuario.html
-
-│   │       ├── eliminar\_usuario.html
-
-│   │       └── lista\_usuarios.html
-
 │   ├── tests.py
 
 │   ├── urls.py
