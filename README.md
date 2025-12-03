@@ -125,7 +125,7 @@ Desde la misma carpeta del proyecto "nuam", ejecuta:
 
 Windows:
 ```
-python -m venv venv
+py -m venv venv
 ```
 ```
 venv\Scripts\activate
@@ -146,7 +146,7 @@ source venv/bin/actívate
 
 Windows:
 ```
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 
 
