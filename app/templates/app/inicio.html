@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+
+<div>
+  <h1 class="titulo" style="text-align:center;">Bienvenido a NUAM</h1>
+</div>
+
+<div class="Form">
+  <h3>Selecciona una opción:</h3>
+  <hr>
+  <div class="menu" style="text-align:center;">
+    {% if request.session.usuario_id %}
+    {% if request.session.tipo == "Administrador" %}
+    <a href="{% url 'menu_admin' %}" class="btn">Ir al Menú Administrador</a>
+    {% else %}
+    <a href="{% url 'menu_usuario' %}" class="btn">Ir al Menú Usuario</a>
+    {% endif %}
+            
+    <a href="{% url 'logout' %}" class="btn" style="background:#c0392b;">Cerrar sesión</a>
+
+    {% else %}
+    <a href="{% url 'login' %}" class="btn" >Iniciar sesión</a>
+    {% endif %}
+     <br>
+  </div>
+</div>
+
+<br><br><br>
+
+<div class="Form">
+  {% if error_api %}
+    <p style="color:red; text-align:center;"><strong>{{ error_api }}</strong></p>
+  {% endif %}
+
+  <h3>Indicadores Económicos (API Mindicador)</h3>
+  <hr>
+
+  <p><strong>TPM:</strong>
+    {% if tpm_actual %} {{ tpm_actual }}% {% else %} No disponible {% endif %}
+  </p>
+
+  <p><strong>CLP → PEN:</strong>
+    {% if tc_clp_pen %} {{ tc_clp_pen }} {% else %} No disponible {% endif %}
+  </p>
+
+  <p><strong>CLP → COP:</strong>
+    {% if tc_clp_cop %} {{ tc_clp_cop }} {% else %} No disponible {% endif %}
+  </p>
+</div>
+
+{% endblock %}

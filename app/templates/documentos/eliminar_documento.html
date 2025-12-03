@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+    <h1>NUAM - Sistema de Gestión</h1>
+    <nav>
+    <a class="btn" href="{% url 'inicio' %}">Volver al Inicio</a>
+    </nav>
+</div>
+
+<br><br>
+
+<div class="Form">
+    <h2>Eliminar Documento</h2>
+    <hr><br>
+    <p>¿Seguro que quieres eliminar el documento "{{ documento }}"?</p>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn" type="submit">Eliminar</button>
+        <a href="{% url 'lista_documentos' %}">cancelar</a>
+    </form>
+    <br><br>
+    {% endblock %}
+
+</div>
+
