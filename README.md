@@ -244,7 +244,7 @@ en otra terminal, dentro de la carpeta nuam, ejecuta
 
 Windows:
 ```
-python manage.py runserver
+py manage.py runserver
 ```
 
 
