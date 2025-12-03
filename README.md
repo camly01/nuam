@@ -108,18 +108,18 @@ Consulta el archivo Manual de Usuario.pdf incluido en el repositorio para obtene
 2\. Abre una terminal y accede a la carpeta creada, luego ejecuta:
 
 ```
-git clone https://github.com/kiuiwi/nuam2
+git clone https://github.com/camly01/nuam
 ```
 
 ```
-cd nuam2
+cd nuam
 ```
 
 <br>
 
 3\. Crear y activar entorno virtual (venv):
 
-Desde la misma carpeta del proyecto "nuam2", ejecuta:
+Desde la misma carpeta del proyecto "nuam", ejecuta:
 
 
 
