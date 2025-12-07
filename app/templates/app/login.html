@@ -3,11 +3,7 @@
 {% load static %}
 
 <br>
-<div>
-  {% if error %}
-    <p style="color:red; text-align:center;"><strong>{{ error }}</strong></p>
-  {% endif %}
-</div>
+
    
   <h2 style="text-align:center;" >Iniciar Sesión</h2>
   <hr>
@@ -26,9 +22,10 @@
 
     <button type="submit" class="btn" style="background-color:rgb(255,66,1); color: white;">Ingresar</button>
 
-    <br>
+    
 
     {% if error %}
+      <br><br>
       <p style="color:red">{{ error }}</p>
     {% endif %}
             
