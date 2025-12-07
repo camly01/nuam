@@ -100,11 +100,16 @@ def inicio(request):
 # CRUD: USUARIO + PERSONA
 
 def lista_registros(request):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
+
     personas = Persona.objects.select_related("usuario").all()
     return render(request, "registro/lista_registros.html", {"personas": personas})
 
 
 def crear_registro(request):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
     if request.method == "POST":
         usuario_form = UsuarioForm(request.POST)
         persona_form = PersonaForm(request.POST)
@@ -134,6 +139,8 @@ def crear_registro(request):
 
 
 def editar_registro(request, usuario_id):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
     usuario = get_object_or_404(Usuario, id_usuario=usuario_id)
     persona = get_object_or_404(Persona, usuario=usuario)
 
@@ -164,6 +171,8 @@ def editar_registro(request, usuario_id):
 
 
 def eliminar_registro(request, usuario_id):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
     usuario = get_object_or_404(Usuario, id_usuario=usuario_id)
 
     if request.method == "POST":
@@ -293,11 +302,15 @@ def eliminar_documento(request, documento_id):
 # LOGS DE EVENTOS (PULSAR)
 
 def lista_logs(request):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
     logs = EventoLog.objects.order_by('-fecha')
     return render(request, 'logs/lista_logs.html', {'logs': logs})
 
 
 def api_logs(request):
+    if request.session.get("tipo") != "Administrador":
+        return redirect("inicio")
     logs = EventoLog.objects.order_by('-fecha')
     data = [model_to_dict(log) for log in logs]
     return JsonResponse(data, safe=False)
