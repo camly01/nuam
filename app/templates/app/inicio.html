@@ -6,29 +6,26 @@
 <div>
   <h1 class="titulo" style="text-align:center;">Bienvenido a NUAM</h1>
 </div>
+<br>
 
-<div class="Form">
-  <h3>Selecciona una opción:</h3>
-  <hr>
   <div class="menu" style="text-align:center;">
     {% if request.session.usuario_id %}
     {% if request.session.tipo == "Administrador" %}
-    <a href="{% url 'menu_admin' %}" class="btn">Ir al Menú Administrador</a>
-    {% else %}
-    <a href="{% url 'menu_usuario' %}" class="btn">Ir al Menú Usuario</a>
+    <h2>Hola, {{ persona.nombres }} {{ persona.apellidos }}</h2>
+    {%else%}
+    <h2>Hola, {{ persona.nombres }} {{ persona.apellidos }}</h2>
     {% endif %}
-            
-    <a href="{% url 'logout' %}" class="btn" style="background:#c0392b;">Cerrar sesión</a>
+    <br>
+    <a href="{% url 'logout' %}" class="btn" style="background:#c0392b;color: white">Cerrar sesión</a>
 
     {% else %}
-    <a href="{% url 'login' %}" class="btn" >Iniciar sesión</a>
+    <a href="{% url 'login' %}" class="btn" style="background-color:rgb(255,66,1); color: white;">Iniciar sesión</a>
     {% endif %}
-     <br>
+     
   </div>
-</div>
 
-<br><br><br>
 
+<br><br>
 <div class="Form">
   {% if error_api %}
     <p style="color:red; text-align:center;"><strong>{{ error_api }}</strong></p>

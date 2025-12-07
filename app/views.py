@@ -16,6 +16,16 @@ from .forms import UsuarioForm, PersonaForm, DocumentoForm
 from django.contrib.auth import authenticate, login as django_login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from functools import wraps
+from django.shortcuts import redirect
+
+def login_requerido(view_func):
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if not request.session.get("usuario_id"):
+            return redirect("login")
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 
 #API MINDICADOR
@@ -65,7 +75,25 @@ def obtener_indicadores():
 
 def inicio(request):
     context = obtener_indicadores()
+
+    persona = None
+
+    # Obtener ID desde sesión
+    usuario_id = request.session.get("usuario_id")
+
+    if usuario_id:
+        # Obtener el usuario
+        usuario = Usuario.objects.filter(id_usuario=usuario_id).first()
+
+        if usuario:
+            # Obtener la persona vinculada
+            persona = Persona.objects.filter(usuario=usuario).first()
+
+    # Agregar persona al contexto
+    context["persona"] = persona
+
     return render(request, "app/inicio.html", context)
+
 
 
 
@@ -157,6 +185,9 @@ def eliminar_registro(request, usuario_id):
 # CRUD: DOCUMENTOS
 
 def lista_documentos(request):
+    if not request.session.get("usuario_id"):
+        return redirect("login")
+
     query = request.GET.get('q')
     tipo = request.GET.get('tipo')
 
@@ -182,6 +213,8 @@ def lista_documentos(request):
 
 
 def crear_documento(request):
+    if not request.session.get("usuario_id"):
+        return redirect("login")
     if request.method == "POST":
         form = DocumentoForm(request.POST, request.FILES)
 
@@ -206,6 +239,8 @@ def crear_documento(request):
 
 
 def editar_documento(request, documento_id):
+    if not request.session.get("usuario_id"):
+        return redirect("login")
     documento = get_object_or_404(Documento, id_documento=documento_id)
 
     if request.method == "POST":
@@ -232,6 +267,8 @@ def editar_documento(request, documento_id):
 
 
 def eliminar_documento(request, documento_id):
+    if not request.session.get("usuario_id"):
+        return redirect("login")
     documento = get_object_or_404(Documento, id_documento=documento_id)
 
     if request.method == "POST":
@@ -337,10 +374,8 @@ def login_view(request):
         EventoLog.objects.create(tipo="Login", mensaje=mensaje)
 
         # REDIRECCIONAR SEGÚN TIPO
-        if usuario.usuario_tipo.usuario_tipo == "Administrador":
-            return redirect("menu_admin")
-        else:
-            return redirect("menu_usuario")
+        return redirect("inicio")
+
 
 
     # GET → mostrar login con indicadores

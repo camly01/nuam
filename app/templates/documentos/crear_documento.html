@@ -3,9 +3,6 @@
 
 <div>
     <h1>NUAM - Sistema de Gestión</h1>
-    <nav>
-    <a class="btn" href="{% url 'inicio' %}">Volver al Inicio</a>
-    </nav>
 </div>
 
 <br><br>
@@ -16,7 +13,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <br>
-        <button class="btn" type="submit">Guardar</button>
+        <button class="btn" type="submit" style="background-color:rgb(255,66,1); color: white;">Guardar</button>
     </form>
     <br>
     <a href="{% url 'lista_documentos' %}">volver a la lista</a>

@@ -4,18 +4,15 @@
 
 <div>
     <h1>NUAM - Sistema de Gestión</h1>
-    <nav>
-    <a class="btn" href="{% url 'inicio' %}">Volver al Inicio</a>
-    </nav>
 </div>
 
-<br><br>
+<br>
 
 
 <div class="Form">
     <h2>Listado de Documentos</h2>
 
-    <hr><br>
+    <hr>
 
     <a href="{% url 'crear_documento' %}">crear nuevo documento</a>
 
@@ -70,5 +67,6 @@
         </tr>
         {% endfor %}
     </table>
+    <br>
 
 {% endblock %}

@@ -3,12 +3,9 @@
 
 <div>
     <h1>NUAM - Sistema de Gestión</h1>
-    <nav>
-    <a class="btn" href="{% url 'inicio' %}">Volver al Inicio</a>
-    </nav>
 </div>
 
-<br><br>
+<br>
 
 <div class="Form">
     <h2>Eliminar Registro</h2>
@@ -18,7 +15,7 @@
     
     <form method="POST">
         {% csrf_token %}
-        <button class="btn" type="submit">Sí, eliminar</button>
+        <button class="btn" type="submit" style="background-color:rgb(255,66,1); color: white;">Sí, eliminar</button>
     </form>
     
     <br>
